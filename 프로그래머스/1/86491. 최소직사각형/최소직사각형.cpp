@@ -10,21 +10,10 @@ int solution(vector<vector<int>> sizes) {
     int answer = 0;
     int count = sizes.size();
     for(int i=0;i<count;i++){
-        if (sizes[i][0]>=sizes[i][1]&&wallet[0]<sizes[i][0]){
-            wallet[0] = sizes[i][0];
-        }
-        else if(sizes[i][0]<sizes[i][1]&&wallet[0]<sizes[i][1]){
-            wallet[0] = sizes[i][1];
-        }
+        wallet[0] = max(wallet[0],max(sizes[i][0],sizes[i][1]));
+        wallet[1] = max(wallet[1],min(sizes[i][0],sizes[i][1]));
     }
-    for(int i=0;i<count;i++){
-        if (sizes[i][0]>=sizes[i][1] && wallet[1]<sizes[i][1]){
-            wallet[1] = sizes[i][1];
-        }
-        else if(sizes[i][0]<sizes[i][1] && wallet[1]<sizes[i][0]){
-            wallet[1] = sizes[i][0];
-        }
-    }
+   
     answer = wallet[0]*wallet[1];
     return answer;
 }
