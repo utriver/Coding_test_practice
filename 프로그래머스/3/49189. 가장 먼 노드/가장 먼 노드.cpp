@@ -12,6 +12,7 @@ int solution(int n, vector<vector<int>> edge) {
     int answer = 0;
     int v=edge.size();
     vector<vector<int>> edge_v;
+    //vector를 size 지정시 vector(사이즈 수, 내부에 넣을 값) <- 이렇게 작성할것//
     vector<int> visited(n+1,0);
     edge_v.resize(n+1);
     
