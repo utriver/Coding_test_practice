@@ -1,33 +1,30 @@
 #include <string>
 #include <vector>
-#include  <algorithm>
-#include <iostream>
 
 using namespace std;
 
 int solution(int n, vector<int> lost, vector<int> reserve) {
     int answer = 0;
-    vector<int> possible (n,1);
-    for (int l:lost){
-        --possible[l-1];
-
-    }
-    for (int r:reserve){
-        ++possible[r-1];
-    }
-    for (int i=0;i<n;i++){
-            if (possible[i-1]==2 && i>0 && possible[i]==0){
-            possible[i-1]--;
-            possible[i]++;
+    // 체육복 현황
+    vector<int> clothes (n,1);
+    for(int i: lost){clothes[i-1]--;}
+    for(int j:reserve){clothes[j-1]++;}
+    for(int k = 0; k<n;k++){
+        if(clothes[k]>=1){
+            answer ++;
         }
-        else if (possible[i+1]==2&&i<n-1 && possible[i]==0){
-            possible[i+1]--;
-            possible[i]++;
+        else{
+            if(k>0&&clothes[k-1]==2){
+                clothes[k-1]--;
+                clothes[k]++;
+                answer++;
+            }
+            else if(k<n-1&& clothes[k+1]==2){
+                clothes[k+1]--;
+                clothes[k]++;
+                answer ++;
+            }
         }
     }
-        
-        
-    answer = count(possible.begin(), possible.end(), 1)+count(possible.begin(), possible.end(), 2);
-    
     return answer;
 }
