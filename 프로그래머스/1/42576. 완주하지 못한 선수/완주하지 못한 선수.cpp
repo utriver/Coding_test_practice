@@ -1,16 +1,25 @@
 #include <string>
 #include <vector>
-#include<bits/stdc++.h>
+#include <unordered_map>
+#include<iostream>
 
 using namespace std;
 
 string solution(vector<string> participant, vector<string> completion) {
-    unordered_map<string, int> cnt;
-    for (const string& name : participant) cnt[name]++;
-    for (const string& name : completion) cnt[name]--;
-
-    for (const auto& [name, c] : cnt) {
-        if (c > 0) return name;
+    string answer = "";
+    unordered_map<string,int> participant_map;
+    for(string s:participant){
+        participant_map[s]++;
     }
-    return ""; // 여기 도달하면 안 됨
+    for(string s:completion){
+        participant_map[s]--;
+    }
+    for(auto pair:participant_map){
+        if(pair.second >0){
+            answer = pair.first;
+            break;
+        }
+    }
+    
+    return answer;
 }
